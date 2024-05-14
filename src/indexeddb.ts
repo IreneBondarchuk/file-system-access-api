@@ -140,38 +140,15 @@ export class IndexedDbWorker {
     });
 }
 
-const RECENT_FILE_STORE = "recent-files";
 const FILE_HANDLES_STORE = "file-handles";
-const TEMP_FILES_STORE = "temp-files";
-const ONEDRIVE_UPLOAD_SESSION_STORE = "onedrive-upload-sessions";
 
 export const idbStores = {
-    RECENT_FILE_STORE,
-    FILE_HANDLES_STORE,
-    TEMP_FILES_STORE,
-    ONEDRIVE_UPLOAD_SESSION_STORE
+    FILE_HANDLES_STORE
 };
 
 export const dbWorker = new IndexedDbWorker({
     stores: [
-        {
-            name: RECENT_FILE_STORE,
-            keyOptions: { keyPath: "id", autoIncrement: true },
-            indexes: [
-                { name: "nameIndex", keyPath: "userPrincipalName", options: { unique: false } },
-                { name: "fileIdIndex", keyPath: "fileId", options: { unique: true } },
-                { name: "pathIndex", keyPath: "path", options: { unique: false } },
-            ]
-        },
-        { name: FILE_HANDLES_STORE },
-        { name: TEMP_FILES_STORE },
-        {
-            name: ONEDRIVE_UPLOAD_SESSION_STORE,
-            keyOptions: { keyPath: "id", autoIncrement: false },
-            indexes: [
-                { name: "fileIdIndex", keyPath: "fileId", options: { unique: true } }
-            ]
-        }
+        { name: FILE_HANDLES_STORE }
     ],
-    version: 6 // update version when you change the schema
+    version: 7 // update version when you change the schema
 });
